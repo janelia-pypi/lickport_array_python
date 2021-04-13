@@ -1,0 +1,88 @@
+#+TITLE: lickport_array_python
+#+AUTHOR: Peter Polidoro
+#+EMAIL: peterpolidoro@gmail.com
+
+* Package Information
+  - Name :: lickport_array_python
+  - Version :: 0.1.0
+  - License :: BSD
+  - URL :: https://github.com/janelia-pypi/lickport_array_python
+  - Author :: Peter Polidoro
+  - Email :: peterpolidoro@gmail.com
+
+  This Python package (lickport_array) creates a class named
+  LickportArray.
+
+* Example Usage
+
+
+  #+BEGIN_SRC python
+  #+END_SRC
+
+** Linux and Mac OS X
+
+   #+BEGIN_SRC sh
+     mkdir -p ~/virtualenvs/lickport_array
+     virtualenv ~/virtualenvs/lickport_array
+     #Python3
+     virtualenv -p python3 ~/virtualenvs/lickport_array
+     source ~/virtualenvs/lickport_array/bin/activate
+     pip install lickport_array
+   #+END_SRC
+
+** Windows
+
+   #+BEGIN_SRC sh
+     virtualenv C:\virtualenvs\lickport_array
+     C:\virtualenvs\lickport_array\Scripts\activate
+     pip install lickport_array
+   #+END_SRC
+
+* Development
+
+** Build Docker Image
+
+   #+BEGIN_SRC sh
+
+     docker stop $(docker ps -aq)
+     docker system prune -f
+     docker build -t python_package_development:latest .
+
+   #+END_SRC
+
+** Run Docker Container
+
+   #+BEGIN_SRC sh
+
+     docker run -it python_package_development:latest
+
+   #+END_SRC
+
+** Install This Package
+
+   #+BEGIN_SRC sh
+
+     cd python_package
+     python setup.py install
+
+   #+END_SRC
+
+** Run ipython and Test
+
+   #+BEGIN_SRC sh
+
+     ipython
+
+   #+END_SRC
+
+** Commit, Tag, and Upload to Pypi
+
+   #+BEGIN_SRC sh
+
+     # git commit ...
+     # git tag ...
+     python3 setup.py sdist bdist_wheel
+     twine upload dist/*
+     git clean -xdf
+
+   #+END_SRC
