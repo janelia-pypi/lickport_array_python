@@ -30,9 +30,10 @@
 
 		#+BEGIN_SRC sh
 
-			docker run --name dummy python_package:latest
-			docker cp dummy:/home/developer/output/ output
-			docker rm -f dummy
+			docker run --name python_package_output python_package:latest
+      rm -rf output
+			docker cp python_package_output:/home/developer/output/ output
+			docker rm -f python_package_output
 			feh output/plots.png
 
 		#+END_SRC
