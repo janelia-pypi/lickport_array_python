@@ -40,6 +40,11 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['contrib', 'docs', 'tests*']),
 
     install_requires=[
+        'numpy',
+        'matplotlib',
     ],
-    include_package_data=True,
+    package_data={
+                  "": ["data/*.csv","data/*.CSV"]},
+    entry_points = {
+                    'console_scripts': ['generate-output=lickport_array.cli:main']},
 )

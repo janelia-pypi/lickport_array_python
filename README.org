@@ -10,79 +10,29 @@
   - Author :: Peter Polidoro
   - Email :: peterpolidoro@gmail.com
 
-  This Python package (lickport_array) creates a class named
-  LickportArray.
+  This Python package (lickport_array)
 
 * Example Usage
 
+** Docker
 
-  #+BEGIN_SRC python
-  #+END_SRC
+*** Build
 
-** Linux and Mac OS X
+		#+BEGIN_SRC sh
 
-   #+BEGIN_SRC sh
-     mkdir -p ~/virtualenvs/lickport_array
-     virtualenv ~/virtualenvs/lickport_array
-     #Python3
-     virtualenv -p python3 ~/virtualenvs/lickport_array
-     source ~/virtualenvs/lickport_array/bin/activate
-     pip install lickport_array
-   #+END_SRC
+			docker stop $(docker ps -aq)
+			docker system prune -f
+			docker build -t python_package:latest .
 
-** Windows
+		#+END_SRC
 
-   #+BEGIN_SRC sh
-     virtualenv C:\virtualenvs\lickport_array
-     C:\virtualenvs\lickport_array\Scripts\activate
-     pip install lickport_array
-   #+END_SRC
+*** Run
 
-* Development
+		#+BEGIN_SRC sh
 
-** Build Docker Image
+			docker run --name dummy python_package:latest
+			docker cp dummy:/home/developer/output/ output
+			docker rm -f dummy
+			feh output/plots.png
 
-   #+BEGIN_SRC sh
-
-     docker stop $(docker ps -aq)
-     docker system prune -f
-     docker build -t python_package_development:latest .
-
-   #+END_SRC
-
-** Run Docker Container
-
-   #+BEGIN_SRC sh
-
-     docker run -it python_package_development:latest
-
-   #+END_SRC
-
-** Install This Package
-
-   #+BEGIN_SRC sh
-
-     cd python_package
-     python setup.py install
-
-   #+END_SRC
-
-** Run ipython and Test
-
-   #+BEGIN_SRC sh
-
-     ipython
-
-   #+END_SRC
-
-** Commit, Tag, and Upload to Pypi
-
-   #+BEGIN_SRC sh
-
-     # git commit ...
-     # git tag ...
-     python3 setup.py sdist bdist_wheel
-     twine upload dist/*
-     git clean -xdf
-
-   #+END_SRC
+		#+END_SRC

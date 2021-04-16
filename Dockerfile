@@ -19,6 +19,8 @@ RUN chown -R developer:developer $DEVELOPMENT_PACKAGE_PATH
 
 USER developer
 
+RUN pip install --upgrade pip
 RUN pip install ipython
+RUN cd python_package && python setup.py install
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["generate-output"]
