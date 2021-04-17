@@ -18,22 +18,28 @@
 
 *** Build
 
-		#+BEGIN_SRC sh
+    #+BEGIN_SRC sh
 
-			docker stop $(docker ps -aq)
-			docker system prune -f
-			docker build -t python_package:latest .
+      make build
 
-		#+END_SRC
+    #+END_SRC
 
 *** Run
 
-		#+BEGIN_SRC sh
+    #+BEGIN_SRC sh
 
-			docker run --name python_package_output python_package:latest
-      rm -rf output
-			docker cp python_package_output:/home/developer/output/ output
-			docker rm -f python_package_output
-			feh output/plots.png
+      make run
 
-		#+END_SRC
+    #+END_SRC
+
+*** Generate requirements.txt
+
+    #+BEGIN_SRC sh
+
+      docker run -it --name python_package_req python_package:latest /bin/bash
+      python -m pip freeze > requirements.txt
+      exit
+      docker cp python_package_req:/home/developer/requirements.txt .
+      docker rm -f python_package_req
+
+    #+END_SRC

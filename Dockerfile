@@ -13,14 +13,15 @@ RUN chown -R developer:developer $VIRTUAL_ENV
 
 ENV SETUPTOOLS_SCM_PRETEND_VERSION="1.2.3"
 
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
 ENV DEVELOPMENT_PACKAGE_PATH=/home/developer/python_package/
 COPY . $DEVELOPMENT_PACKAGE_PATH
 RUN chown -R developer:developer $DEVELOPMENT_PACKAGE_PATH
 
 USER developer
 
-RUN pip install --upgrade pip
-RUN pip install ipython
 RUN cd python_package && python setup.py install
 
-ENTRYPOINT ["generate-output"]
+CMD ["generate-output"]

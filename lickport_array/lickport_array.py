@@ -41,6 +41,7 @@ class LickportArray():
             plt.subplot(4,2,subplot_index)
             subplot_index += 1
             plt.plot(run[:,0],run[:,1])
+            plt.ylim([-0.2,0.2])
             plt.title(name)
         plt.tight_layout()
         plot_path = self.output_path / 'plots.png'
