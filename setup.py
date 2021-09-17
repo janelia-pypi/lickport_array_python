@@ -20,7 +20,7 @@ setuptools.setup(
     url='https://github.com/janelia-pypi/lickport_array_python',
 
     author='Peter Polidoro',
-    author_email='peterpolidoro@gmail.com',
+    author_email='peter@polidoro.io',
 
     license='BSD',
 
@@ -40,8 +40,7 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['contrib', 'docs', 'tests*']),
 
     install_requires=[
-        'numpy',
-        'matplotlib',
+        'scipy',
     ],
     package_data={
                   "": ["data/*.csv","data/*.CSV"]},

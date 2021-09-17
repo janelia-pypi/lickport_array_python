@@ -5,7 +5,7 @@ This Python package creates a class named LickportArray.
 
 Authors::
 
-    Peter Polidoro <peterpolidoro@gmail.com>
+    Peter Polidoro <peter@polidoro.io>
 
 License::
 
