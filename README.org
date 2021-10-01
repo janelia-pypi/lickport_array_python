@@ -10,7 +10,7 @@
   - Author :: Peter Polidoro
   - Email :: peter@polidoro.io
 
-  This Python package (lickport_array)
+    This Python package (lickport_array)
 
 * Example Usage
 
@@ -18,31 +18,16 @@
 
 *** Build
 
-    #+BEGIN_SRC sh
+#+BEGIN_SRC sh
 
-      make build
+make build
 
-    #+END_SRC
+#+END_SRC
 
 *** Run
 
-    #+BEGIN_SRC sh
+#+BEGIN_SRC sh
 
-      make run
+make run
 
-    #+END_SRC
-
-*** Generate requirements.txt
-
-    #+BEGIN_SRC sh
-
-			make build
-			docker run -it --name python_package_req python_package:latest /bin/bash
-			rm requirements.txt
-			python -m pip freeze > requirements.txt
-			exit
-			docker cp python_package_req:/home/developer/requirements.txt .
-			sed -i '/lickport-array/d' ./requirements.txt
-			docker rm -f python_package_req
-
-    #+END_SRC
+#+END_SRC

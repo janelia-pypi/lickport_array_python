@@ -40,10 +40,7 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['contrib', 'docs', 'tests*']),
 
     install_requires=[
-        'scipy',
+        'modular_client',
+        'flatten_json',
     ],
-    package_data={
-                  "": ["data/*.csv","data/*.CSV"]},
-    entry_points = {
-                    'console_scripts': ['generate-output=lickport_array.cli:main']},
 )
