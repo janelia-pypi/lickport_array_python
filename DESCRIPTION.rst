@@ -11,5 +11,3 @@ License::
 
     BSD
 
-Example Usage::
-
