@@ -9,15 +9,15 @@ with codecs.open(here.joinpath('DESCRIPTION.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setuptools.setup(
-    name='lickport_array',
+    name='lickport_array_interface',
 
     use_scm_version = True,
     setup_requires=['setuptools_scm'],
 
-    description='Lickport array.',
+    description='Lickport array interface.',
     long_description=long_description,
 
-    url='https://github.com/janelia-pypi/lickport_array_python',
+    url='https://github.com/janelia-pypi/lickport_array_interface_python',
 
     author='Peter Polidoro',
     author_email='peter@polidoro.io',
@@ -44,7 +44,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'controller = lickport_array.lickport_array:main',
+            'controller = lickport_array_interface.lickport_array_interface:main',
         ],
     },
 )

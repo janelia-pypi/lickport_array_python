@@ -6,11 +6,11 @@ from modular_client import ModularClient
 try:
     from pkg_resources import get_distribution, DistributionNotFound
     import os
-    _dist = get_distribution('lickport_array')
+    _dist = get_distribution('lickport_array_interface_interface')
     # Normalize case for Windows systems
     dist_loc = os.path.normcase(_dist.location)
     here = os.path.normcase(__file__)
-    if not here.startswith(os.path.join(dist_loc, 'lickport_array')):
+    if not here.startswith(os.path.join(dist_loc, 'lickport_array_interface_interface')):
         # not installed, but there is another version that *is*
         raise DistributionNotFound
 except (ImportError,DistributionNotFound):
@@ -21,7 +21,7 @@ else:
 
 DEBUG = False
 
-class LickportArray():
+class LickportArrayInterface():
     '''
     '''
     _CHECK_DATA_PERIOD = 1.0
@@ -47,8 +47,8 @@ class LickportArray():
 
 def main(args=None):
     debug = False
-    dev = LickportArray(debug=debug)
-    dev.start_check_data_timer()
+    lai = LickportArrayInterface(debug=debug)
+    lai.start_check_data_timer()
 
 # -----------------------------------------------------------------------------------------
 if __name__ == '__main__':

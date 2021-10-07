@@ -1,7 +1,7 @@
-lickport_array_python
-=====================
+lickport_array_interface_python
+===============================
 
-This Python package creates a class named LickportArray.
+This Python package creates a class named LickportArrayInterface.
 
 Authors::
 
