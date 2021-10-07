@@ -42,4 +42,9 @@ setuptools.setup(
     install_requires=[
         'modular_client',
     ],
+    entry_points={
+        'console_scripts': [
+            'controller = lickport_array.lickport_array:main',
+        ],
+    },
 )

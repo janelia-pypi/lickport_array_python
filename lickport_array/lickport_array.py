@@ -40,11 +40,16 @@ class LickportArray():
         print("Check data timer started")
 
     def _check_data(self):
+        self._check_data_timer.start()
         data = self.dev.get_and_clear_lick_data()
-        print(data)
+        if len(data) > 0:
+            print(data)
+
+def main(args=None):
+    debug = False
+    dev = LickportArray(debug=debug)
+    dev.start_check_data_timer()
 
 # -----------------------------------------------------------------------------------------
 if __name__ == '__main__':
-
-    debug = False
-    dev = LickportArray(debug=debug)
+    main()
