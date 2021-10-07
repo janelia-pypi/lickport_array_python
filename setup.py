@@ -44,7 +44,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'controller = lickport_array_interface.lickport_array_interface:main',
+            'lai = lickport_array_interface.lickport_array_interface:main',
         ],
     },
 )

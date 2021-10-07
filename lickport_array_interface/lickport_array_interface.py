@@ -1,5 +1,6 @@
 import time
 from threading import Timer
+import atexit
 
 from modular_client import ModularClient
 
@@ -31,19 +32,26 @@ class LickportArrayInterface():
         else:
             kwargs.update({'debug': DEBUG})
             self.debug = DEBUG
+        atexit.register(self._exit)
         self.dev = ModularClient()
         self.dev.set_time(int(time.time()))
 
     def start_check_data_timer(self):
         self._check_data_timer = Timer(self._CHECK_DATA_PERIOD,self._check_data)
         self._check_data_timer.start()
-        print("Check data timer started")
 
     def _check_data(self):
-        self._check_data_timer.start()
+        self.start_check_data_timer()
         data = self.dev.get_and_clear_lick_data()
         if len(data) > 0:
-            print(data)
+            for datum in data:
+                print(datum)
+
+    def _exit(self):
+        try:
+            self._check_data_timer.cancel()
+        except AttributeError:
+            pass
 
 def main(args=None):
     debug = False
