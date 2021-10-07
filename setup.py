@@ -41,6 +41,5 @@ setuptools.setup(
 
     install_requires=[
         'modular_client',
-        'flatten_json',
     ],
 )

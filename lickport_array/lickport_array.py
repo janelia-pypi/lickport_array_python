@@ -1,5 +1,5 @@
-import pathlib
-import flatten_json
+import time
+from threading import Timer
 
 from modular_client import ModularClient
 
@@ -24,6 +24,7 @@ DEBUG = False
 class LickportArray():
     '''
     '''
+    _CHECK_DATA_PERIOD = 1.0
     def __init__(self,*args,**kwargs):
         if 'debug' in kwargs:
             self.debug = kwargs['debug']
@@ -32,6 +33,15 @@ class LickportArray():
             self.debug = DEBUG
         self.dev = ModularClient()
         self.dev.set_time(int(time.time()))
+
+    def start_check_data_timer(self):
+        self._check_data_timer = Timer(self._CHECK_DATA_PERIOD,self._check_data)
+        self._check_data_timer.start()
+        print("Check data timer started")
+
+    def _check_data(self):
+        data = self.dev.get_and_clear_lick_data()
+        print(data)
 
 # -----------------------------------------------------------------------------------------
 if __name__ == '__main__':
