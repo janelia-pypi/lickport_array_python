@@ -33,8 +33,9 @@ class LickportArrayInterface():
             kwargs.update({'debug': DEBUG})
             self.debug = DEBUG
         atexit.register(self._exit)
-        self.dev = ModularClient()
-        self.dev.set_time(int(time.time()))
+        self.controller = ModularClient()
+        self.controller.set_time(int(time.time()))
+        self.data = []
 
     def start_check_data_timer(self):
         self._check_data_timer = Timer(self._CHECK_DATA_PERIOD,self._check_data)
@@ -42,10 +43,11 @@ class LickportArrayInterface():
 
     def _check_data(self):
         self.start_check_data_timer()
-        data = self.dev.get_and_clear_lick_data()
+        data = self.controller.get_and_clear_lick_data()
         if len(data) > 0:
             for datum in data:
                 print(datum)
+            self.data.extend(data)
 
     def _exit(self):
         try:
