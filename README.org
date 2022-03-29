@@ -4,7 +4,7 @@
 
 * Package Information
   - Name :: lickport_array_interface_python
-  - Version :: 0.4.0
+  - Version :: 0.5.0
   - License :: BSD
   - URL :: https://github.com/janelia-pypi/lickport_array_interface_python
   - Author :: Peter Polidoro
@@ -13,4 +13,41 @@
     This Python package (lickport_array_interface)
 
 * Example Usage
+
+* Installation
+
+[[https://github.com/janelia-pypi/python_setup]]
+
+** Linux and Mac OS X
+
+#+BEGIN_SRC sh
+
+python3 -m venv ~/venvs/lickport_array_interface
+source ~/venvs/lickport_array_interface/bin/activate
+pip install lickport_array_interface
+
+#+END_SRC
+
+** Windows
+
+#+BEGIN_SRC sh
+
+python3 -m venv C:\venvs\lickport_array_interface
+C:\venvs\lickport_array_interface\Scripts\activate
+pip install lickport_array_interface
+
+#+END_SRC
+
+* Development
+
+** Guix
+
+#+BEGIN_SRC sh
+
+guix time-machine -C channels.scm -- shell -D -f guix.scm
+python3 setup.py sdist bdist_wheel
+twine upload dist/*
+git clean -xdf
+
+#+END_SRC
 

@@ -11,8 +11,7 @@ with codecs.open(here.joinpath('DESCRIPTION.rst'), encoding='utf-8') as f:
 setuptools.setup(
     name='lickport_array_interface',
 
-    use_scm_version = True,
-    setup_requires=['setuptools_scm'],
+    version = '0.5.0',
 
     description='Lickport array interface.',
     long_description=long_description,
