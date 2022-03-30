@@ -1,5 +1,4 @@
 include DESCRIPTION.rst
 include README.org
-include RELEASE-VERSION
-include version.py
-include setup.py
+include LICENSE
+include *.scm

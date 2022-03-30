@@ -14,6 +14,18 @@
 
 * Example Usage
 
+#+BEGIN_SRC python
+
+from lickport_array_interface import LickportArrayInterface
+dev = LickportArrayInterface() # Try to automatically detect port
+dev = LickportArrayInterface(port='/dev/ttyACM0') # Linux specific port
+dev = LickportArrayInterface(port='/dev/tty.usbmodem262471') # Mac OS X specific port
+dev = LickportArrayInterface(port='COM3') # Windows specific port
+dev.start_saving_data()
+dev.stop_saving_data()
+
+#+END_SRC
+
 * Installation
 
 [[https://github.com/janelia-pypi/python_setup]]
@@ -44,10 +56,12 @@ pip install lickport_array_interface
 
 #+BEGIN_SRC sh
 
-guix time-machine -C channels.scm -- shell -D -f guix.scm
+guix time-machine -C channels.scm -- shell --pure -D -f guix.scm
 python3 setup.py sdist bdist_wheel
 twine upload dist/*
+git add --all
 git clean -xdf
+exit
 
 #+END_SRC
 
