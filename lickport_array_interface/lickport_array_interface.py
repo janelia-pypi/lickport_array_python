@@ -28,27 +28,41 @@ DEBUG = False
 class LickportArrayInterface():
     '''
     '''
-    _DATA_PERIOD = 5.0
+    _DATA_PERIOD = 1.0
+    _LICKED_STRING = 'L'
+    _ACTIVATED_STRING = 'A'
     def __init__(self,*args,**kwargs):
         if 'debug' in kwargs:
             self.debug = kwargs['debug']
         else:
             kwargs.update({'debug': DEBUG})
             self.debug = DEBUG
+
         atexit.register(self._exit)
+
         self.controller = ModularClient(*args,**kwargs)
         self.controller.set_time(int(time.time()))
         self.controller.calibrate_lick_sensor()
-        self.data = []
+        self._lickport_count = self._get_lickport_count()
+
         self._data_period = self._DATA_PERIOD
         self._base_path = pathlib.Path('~/lickport_array_data').expanduser()
         self._data_filename = 'data.csv'
         self._acquiring_data = False
         self._saving_data = False
-        self._data_fieldnames = ['',
-                                 '',
-                                 '',
-                                 '']
+        self._data_fieldnames = ['time',
+                                 'millis']
+        self._lickport_fieldnames = [f'lickport_{lickport}' for lickport in range(self._lickport_count)]
+        self._data_fieldnames.extend(self._lickport_fieldnames)
+
+    def _get_lickport_count(self):
+        lickport_count = 0
+        method_dict = self.controller.activate_lickport('??')
+        method_parameters = method_dict['parameters']
+        for method_parameter in method_parameters:
+            if method_parameter['name'] == 'lickport':
+                lickport_count = method_parameter['max'] + 1
+        return lickport_count
 
     def start_acquiring_data(self,data_period=None):
         if data_period:
@@ -83,9 +97,17 @@ class LickportArrayInterface():
         if len(data) > 0:
             for datum in data:
                 print(datum)
-            self.data.extend(data)
-            with open(self._data_file_path, 'a') as outfile:
-                json.dump(self.data, outfile)
+            lickports_licked = datum.pop('lickports_licked')
+            licked_strings = [self._LICKED_STRING if lickport in lickports_licked else ''
+                              for lickport in range(self._lickport_count)]
+            lickports_activated = datum.pop('lickports_activated')
+            activated_strings = [self._ACTIVATED_STRING if lickport in lickports_activated else ''
+                                 for lickport in range(self._lickport_count)]
+            lickport_strings = [''.join([i for i in x])
+                                for x in zip(licked_strings,activated_strings)]
+            lickport_datum = dict(zip(self._lickport_fieldnames,lickport_strings))
+            datum |= lickport_datum
+            self._data_writer.writerow(datum)
         self._start_data_timer()
 
     def _start_data_timer(self):
@@ -95,6 +117,7 @@ class LickportArrayInterface():
     def _exit(self):
         try:
             self.stop_saving_data()
+            self.stop_acquiring_data()
         except AttributeError:
             pass
 
