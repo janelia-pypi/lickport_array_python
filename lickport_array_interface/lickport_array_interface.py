@@ -47,7 +47,6 @@ class LickportArrayInterface():
 
         self._data_period = self._DATA_PERIOD
         self._base_path = pathlib.Path('~/lickport_array_data').expanduser()
-        self._data_filename = 'data.csv'
         self._acquiring_data = False
         self._saving_data = False
         self._data_fieldnames = ['time',
@@ -69,6 +68,7 @@ class LickportArrayInterface():
             self._data_period = data_period
         else:
             self._data_period = self._DATA_PERIOD
+        self.controller.get_and_clear_lick_data()
         self._start_data_timer()
         self._acquiring_data = True
 
@@ -77,9 +77,10 @@ class LickportArrayInterface():
         self._acquiring_data = False
 
     def start_saving_data(self):
-        data_directory_path = self._base_path / self._get_date_time_str()
+        data_directory_path = self._base_path / self._get_date_str()
         data_directory_path.mkdir(parents=True,exist_ok=True)
-        data_file_path = data_directory_path / self._data_filename
+        data_filename = self._get_time_str() + '.csv'
+        data_file_path = data_directory_path / data_filename
         self._data_file = open(data_file_path,'w')
         self._data_writer = csv.DictWriter(self._data_file,fieldnames=self._data_fieldnames)
         self._data_writer.writeheader()
@@ -92,11 +93,8 @@ class LickportArrayInterface():
         self._saving_data = False
         self._data_file.close()
 
-    def _handle_data(self):
-        data = self.controller.get_and_clear_lick_data()
-        if len(data) > 0:
-            for datum in data:
-                print(datum)
+    def _save_datum(self,datum):
+        if self._saving_data:
             lickports_licked = datum.pop('lickports_licked')
             licked_strings = [self._LICKED_STRING if lickport in lickports_licked else ''
                               for lickport in range(self._lickport_count)]
@@ -106,8 +104,14 @@ class LickportArrayInterface():
             lickport_strings = [''.join([i for i in x])
                                 for x in zip(licked_strings,activated_strings)]
             lickport_datum = dict(zip(self._lickport_fieldnames,lickport_strings))
-            datum |= lickport_datum
+            datum = {**datum, **lickport_datum}
             self._data_writer.writerow(datum)
+
+    def _handle_data(self):
+        data = self.controller.get_and_clear_lick_data()
+        for datum in data:
+            print(datum)
+            self._save_datum(datum)
         self._start_data_timer()
 
     def _start_data_timer(self):
@@ -121,16 +125,23 @@ class LickportArrayInterface():
         except AttributeError:
             pass
 
-    def _get_date_time_str(self,timestamp=None):
+    def _get_datetime(self,timestamp=None):
+        dt = None
         if timestamp is None:
-            d = datetime.fromtimestamp(time.time())
-        elif timestamp == 0:
-            date_time_str = 'NULL'
-            return date_time_str
+            dt = datetime.fromtimestamp(time.time())
         else:
-            d = datetime.fromtimestamp(timestamp)
-        date_time_str = d.strftime('%Y-%m-%d-%H-%M-%S')
-        return date_time_str
+            dt = datetime.fromtimestamp(timestamp)
+        return dt
+
+    def _get_date_str(self,timestamp=None):
+        dt = self._get_datetime(timestamp)
+        date_str = dt.strftime('%Y-%m-%d')
+        return date_str
+
+    def _get_time_str(self,timestamp=None):
+        dt = self._get_datetime(timestamp)
+        time_str = dt.strftime('%H-%M-%S')
+        return time_str
 
 
 
