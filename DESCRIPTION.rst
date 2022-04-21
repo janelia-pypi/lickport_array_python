@@ -22,3 +22,17 @@ Example Usage::
     dev.start_saving_data()
     dev.stop_saving_data()
     dev.stop_acquiring_data()
+
+    dev.controller.dispense_lickport_for_duration(0,200)
+    dev.controller.dispense_lickports_for_duration([0,1],200)
+    dev.controller.dispense_all_lickports_for_duration(200)
+    dev.controller.get_activated_lickports()
+    dev.controller.activate_only_lickport(0)
+    dev.controller.activate_only_lickports([0,1])
+    dev.controller.activate_lickport(0)
+    dev.controller.activate_lickports([0,1])
+    dev.controller.deactivate_lickport(0)
+    dev.controller.deactivate_lickports([0,1])
+    dev.controller.activate_all_lickports()
+    dev.controller.deactivate_all_lickports()
+
