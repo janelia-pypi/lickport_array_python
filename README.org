@@ -71,10 +71,10 @@ days.
 
 ** lickport_n
 
-"L" : lickport_n lick detected
-"A" : lickport_n activated
-"LA", "AL" : lickport_n lick detected and activated
-"" : lickport_n neither lick detected nor activated
+- "L" : lickport_n lick detected
+- "A" : lickport_n activated
+- "LA", "AL" : lickport_n lick detected and activated
+- "" : lickport_n neither lick detected nor activated
 
 * Installation
 
