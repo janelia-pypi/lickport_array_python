@@ -71,10 +71,12 @@ days.
 
 ** lickport_n
 
-- "L" : lickport_n lick detected
-- "A" : lickport_n activated
-- "LA", "AL" : lickport_n lick detected and activated
-- "" : lickport_n neither lick detected nor activated
+| Symbol       | Meaning                                        |
+|--------------+------------------------------------------------|
+| "L"          | lickport_n lick detected                       |
+| "A"          | lickport_n activated                           |
+| "LA" or "AL" | lickport_n lick detected and activated         |
+| ""           | lickport_n neither lick detected nor activated |
 
 * Installation
 
