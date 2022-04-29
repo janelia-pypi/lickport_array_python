@@ -4,7 +4,7 @@
 
 * Package Information
   - Name :: lickport_array_interface_python
-  - Version :: 0.7.0
+  - Version :: 0.8.0
   - License :: BSD
   - URL :: https://github.com/janelia-pypi/lickport_array_interface_python
   - Author :: Peter Polidoro
@@ -21,8 +21,11 @@ dev = LickportArrayInterface() # Try to automatically detect port
 dev = LickportArrayInterface(port='/dev/ttyACM0') # Linux specific port
 dev = LickportArrayInterface(port='/dev/tty.usbmodem262471') # Mac OS X specific port
 dev = LickportArrayInterface(port='COM3') # Windows specific port
+
+data_path_string = '~/lickport_array_data/data_file'
+
 dev.start_acquiring_data()
-dev.start_saving_data()
+dev.start_saving_data(data_path_string)
 dev.stop_saving_data()
 dev.stop_acquiring_data()
 

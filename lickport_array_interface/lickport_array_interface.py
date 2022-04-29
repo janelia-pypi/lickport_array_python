@@ -1,7 +1,7 @@
 import time
 from threading import Timer
 import atexit
-import pathlib
+from pathlib import Path
 from datetime import datetime
 import csv
 
@@ -29,6 +29,8 @@ class LickportArrayInterface():
     '''
     '''
     _DATA_PERIOD = 1.0
+    _DATA_BASE_PATH_STRING = '~/lickport_array_data'
+    _DATA_FILE_SUFFIX = '.csv'
     _LICKED_STRING = 'L'
     _ACTIVATED_STRING = 'A'
     def __init__(self,*args,**kwargs):
@@ -43,10 +45,10 @@ class LickportArrayInterface():
         self.controller = ModularClient(*args,**kwargs)
         self.controller.set_time(int(time.time()))
         self.controller.calibrate_lick_sensor()
-        self._lickport_count = self._get_lickport_count()
+        self._lickport_count = self.controller.get_lickport_count()
 
         self._data_period = self._DATA_PERIOD
-        self._base_path = pathlib.Path('~/lickport_array_data').expanduser()
+        self._base_path = Path(self._DATA_BASE_PATH_STRING).expanduser()
         self._acquiring_data = False
         self._saving_data = False
         self._data_fieldnames = ['time',
@@ -54,21 +56,12 @@ class LickportArrayInterface():
         self._lickport_fieldnames = [f'lickport_{lickport}' for lickport in range(self._lickport_count)]
         self._data_fieldnames.extend(self._lickport_fieldnames)
 
-    def _get_lickport_count(self):
-        lickport_count = 0
-        method_dict = self.controller.activate_lickport('??')
-        method_parameters = method_dict['parameters']
-        for method_parameter in method_parameters:
-            if method_parameter['name'] == 'lickport':
-                lickport_count = method_parameter['max'] + 1
-        return lickport_count
-
     def start_acquiring_data(self,data_period=None):
         if data_period:
             self._data_period = data_period
         else:
             self._data_period = self._DATA_PERIOD
-        self.controller.get_and_clear_lick_data()
+        self.controller.get_and_clear_saved_data()
         self._start_data_timer()
         self._acquiring_data = True
 
@@ -76,15 +69,20 @@ class LickportArrayInterface():
         self._data_timer.cancel()
         self._acquiring_data = False
 
-    def start_saving_data(self):
-        data_directory_path = self._base_path / self._get_date_str()
+    def start_saving_data(self, data_path_string=None):
+        if not data_path_string:
+            data_directory_path = self._base_path / self._get_date_str()
+            data_file_name = self._get_time_str() + self._DATA_FILE_SUFFIX
+        else:
+            data_path = Path(data_path_string).expanduser()
+            data_directory_path = data_path.parent
+            data_file_name = data_path.stem +  self._DATA_FILE_SUFFIX
+        data_file_path = data_directory_path / data_file_name
         data_directory_path.mkdir(parents=True,exist_ok=True)
-        data_filename = self._get_time_str() + '.csv'
-        data_file_path = data_directory_path / data_filename
+        print('Creating: {0}'.format(data_file_path))
         self._data_file = open(data_file_path,'w')
         self._data_writer = csv.DictWriter(self._data_file,fieldnames=self._data_fieldnames)
         self._data_writer.writeheader()
-        print('Created: {0}'.format(data_file_path))
         self._saving_data = True
         if not self._acquiring_data:
             self.start_acquiring_data()
@@ -108,7 +106,7 @@ class LickportArrayInterface():
             self._data_writer.writerow(datum)
 
     def _handle_data(self):
-        data = self.controller.get_and_clear_lick_data()
+        data = self.controller.get_and_clear_saved_data()
         for datum in data:
             print(datum)
             self._save_datum(datum)

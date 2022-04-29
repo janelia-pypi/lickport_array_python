@@ -18,8 +18,11 @@ Example Usage::
     dev = LickportArrayInterface(port='/dev/ttyACM0') # Linux specific port
     dev = LickportArrayInterface(port='/dev/tty.usbmodem262471') # Mac OS X specific port
     dev = LickportArrayInterface(port='COM3') # Windows specific port
+
+    data_path_string = '~/lickport_array_data/data_file'
+
     dev.start_acquiring_data()
-    dev.start_saving_data()
+    dev.start_saving_data(data_path_string)
     dev.stop_saving_data()
     dev.stop_acquiring_data()
 
