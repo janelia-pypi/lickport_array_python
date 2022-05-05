@@ -3,25 +3,18 @@ from threading import Timer
 import atexit
 from pathlib import Path
 from datetime import datetime
-import csv
 
 from modular_client import ModularClient
 
-try:
-    from pkg_resources import get_distribution, DistributionNotFound
-    import os
-    _dist = get_distribution('lickport_array_interface_interface')
-    # Normalize case for Windows systems
-    dist_loc = os.path.normcase(_dist.location)
-    here = os.path.normcase(__file__)
-    if not here.startswith(os.path.join(dist_loc, 'lickport_array_interface_interface')):
-        # not installed, but there is another version that *is*
-        raise DistributionNotFound
-except (ImportError,DistributionNotFound):
-    __version__ = None
-else:
-    __version__ = _dist.version
 
+__version__ = None
+with open(Path(__file__).parent.parent / 'README.org') as readme_file:
+    version_marker_str = '- Version ::'
+    readme_lines = readme_file.readlines()
+    for readme_line in readme_lines:
+        if version_marker_str in readme_line:
+            __version__ = readme_line.replace(version_marker_str,'').strip()
+            break
 
 DEBUG = False
 
@@ -30,7 +23,7 @@ class LickportArrayInterface():
     '''
     _DATA_PERIOD = 1.0
     _DATA_BASE_PATH_STRING = '~/lickport_array_data'
-    _DATA_FILE_SUFFIX = '.csv'
+    # _DATA_FILE_SUFFIX = '.csv'
     _LICKED_STRING = 'L'
     _ACTIVATED_STRING = 'A'
     def __init__(self,*args,**kwargs):
@@ -81,8 +74,8 @@ class LickportArrayInterface():
         data_directory_path.mkdir(parents=True,exist_ok=True)
         print('Creating: {0}'.format(data_file_path))
         self._data_file = open(data_file_path,'w')
-        self._data_writer = csv.DictWriter(self._data_file,fieldnames=self._data_fieldnames)
-        self._data_writer.writeheader()
+        # self._data_writer = csv.DictWriter(self._data_file,fieldnames=self._data_fieldnames)
+        # self._data_writer.writeheader()
         self._saving_data = True
         if not self._acquiring_data:
             self.start_acquiring_data()
@@ -103,7 +96,7 @@ class LickportArrayInterface():
                                 for x in zip(licked_strings,activated_strings)]
             lickport_datum = dict(zip(self._lickport_fieldnames,lickport_strings))
             datum = {**datum, **lickport_datum}
-            self._data_writer.writerow(datum)
+            # self._data_writer.writerow(datum)
 
     def _handle_data(self):
         data = self.controller.get_and_clear_saved_data()
