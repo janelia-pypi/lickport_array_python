@@ -1,4 +1,4 @@
-include DESCRIPTION.rst
 include README.org
+include README.md
 include LICENSE
 include *.scm

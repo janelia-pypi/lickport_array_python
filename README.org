@@ -1,18 +1,19 @@
 #+TITLE: lickport_array_interface_python
 #+AUTHOR: Peter Polidoro
 #+EMAIL: peter@polidoro.io
+#+OPTIONS: author:t email:t toc:nil ^:nil
 
-* Package Information
-  - Name :: lickport_array_interface_python
-  - Version :: 5.6.7
-  - License :: BSD
-  - URL :: https://github.com/janelia-pypi/lickport_array_interface_python
-  - Author :: Peter Polidoro
-  - Email :: peter@polidoro.io
+* Description
+- Name :: lickport_array_interface_python
+- Version :: 1.0.0
+- License :: BSD 3-Clause License
+- URL :: https://github.com/janelia-pypi/lickport_array_interface_python
+- Author :: Peter Polidoro
+- Email :: peter@polidoro.io
 
-    This Python package (lickport_array_interface)
+  This Python package (lickport_array_interface)
 
-* Example Usage
+** Example Usage
 
 #+BEGIN_SRC python
 
