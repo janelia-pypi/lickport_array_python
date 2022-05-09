@@ -1,8 +1,8 @@
-!#+TITLE: lickport_array_interface_python
+#+TITLE: lickport_array_interface_python
 #+AUTHOR: Peter Polidoro
 #+EMAIL: peter@polidoro.io
 #+EXPORT_FILE_NAME: DESCRIPTION.md
-#+OPTIONS: title:t author:t email:t toc:f |:t ^:nil tags:nil
+#+OPTIONS: title:t author:t email:t toc:nil |:t ^:nil tags:nil
 
 * Description
 - Name :: lickport_array_interface_python
