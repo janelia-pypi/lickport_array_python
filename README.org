@@ -1,7 +1,8 @@
-#+TITLE: lickport_array_interface_python
+!#+TITLE: lickport_array_interface_python
 #+AUTHOR: Peter Polidoro
 #+EMAIL: peter@polidoro.io
-#+OPTIONS: author:t email:t toc:nil ^:nil
+#+EXPORT_FILE_NAME: DESCRIPTION.md
+#+OPTIONS: title:t author:t email:t toc:f |:t ^:nil tags:nil
 
 * Description
 - Name :: lickport_array_interface_python
@@ -125,7 +126,7 @@ ipython
 
 git clone https://github.com/janelia-pypi/lickport_array_interface_python
 cd lickport_array_interface_python
-guix time-machine -C channels.scm -- shell --pure -D -f guix.scm
+make shell
 python3 setup.py sdist bdist_wheel
 twine upload dist/*
 git add --all

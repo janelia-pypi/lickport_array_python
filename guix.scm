@@ -4,6 +4,9 @@
  (guix gexp)
  ((guix licenses) #:prefix license:)
  (guix build-system python)
+ (gnu packages base)
+ (gnu packages emacs)
+ (gnu packages emacs-xyz)
  (gnu packages python-build)
  (gnu packages python-xyz)
  (gnu packages version-control)
@@ -20,13 +23,16 @@
                         #:recursive? #t
                         #:select? (git-predicate %source-dir)))
     (build-system python-build-system)
-    (native-inputs (list python-wheel
+    (native-inputs (list gnu-make
+                         git
+                         emacs
+                         emacs-org
+                         emacs-ox-gfm
+                         python-wheel
                          python-twine
                          python-ipython
-                         python-vitables
-                         git))
-    (propagated-inputs (list python-modular-client
-                             python-h5py))
+                         python-vitables))
+    (propagated-inputs (list python-modular-client))
     (home-page "")
     (synopsis "")
     (description "")

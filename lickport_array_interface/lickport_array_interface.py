@@ -4,7 +4,7 @@ import atexit
 from pathlib import Path
 from datetime import datetime
 import re
-import h5py
+import csv
 
 from modular_client import ModularClient
 
@@ -25,12 +25,9 @@ class LickportArrayInterface():
     '''
     _DATA_PERIOD = 1.0
     _DATA_BASE_PATH_STRING = '~/lickport_array_data'
-    _DATA_FILE_SUFFIX = '.h5'
-    _TIMESTAMPS_DATASET_NAME = 'timestamps'
-    _INITIAL_ROW_COUNT = 100
-    _TIMESTAMP_COLUMN_COUNT = 2
-    # _LICKED_STRING = 'L'
-    # _ACTIVATED_STRING = 'A'
+    _DATA_FILE_SUFFIX = '.csv'
+    _LICKED_STRING = 'L'
+    _ACTIVATED_STRING = 'A'
     def __init__(self,*args,**kwargs):
         if 'debug' in kwargs:
             self.debug = kwargs['debug']
@@ -49,10 +46,10 @@ class LickportArrayInterface():
         self._base_path = Path(self._DATA_BASE_PATH_STRING).expanduser()
         self._acquiring_data = False
         self._saving_data = False
-        # self._data_fieldnames = ['time',
-        #                          'millis']
-        # self._lickport_fieldnames = [f'lickport_{lickport}' for lickport in range(self._lickport_count)]
-        # self._data_fieldnames.extend(self._lickport_fieldnames)
+        self._data_fieldnames = ['time',
+                                 'millis']
+        self._lickport_fieldnames = [f'lickport_{lickport}' for lickport in range(self._lickport_count)]
+        self._data_fieldnames.extend(self._lickport_fieldnames)
 
     def start_acquiring_data(self,data_period=None):
         if data_period:
@@ -78,12 +75,8 @@ class LickportArrayInterface():
         data_file_path = data_directory_path / data_file_name
         data_directory_path.mkdir(parents=True,exist_ok=True)
         print('Creating: {0}'.format(data_file_path))
-        self._data_file = h5py.File(data_file_path,'a')
-        self._data_file.create_dataset(self._TIMESTAMPS_DATASET_NAME,
-                                       (self._INITIAL_ROW_COUNT,self._TIMESTAMP_COLUMN_COUNT),
-                                       maxshape=(None,self._TIMESTAMP_COLUMN_COUNT))
-        # self._data_writer = csv.DictWriter(self._data_file,fieldnames=self._data_fieldnames)
-        # self._data_writer.writeheader()
+        self._data_writer = csv.DictWriter(self._data_file,fieldnames=self._data_fieldnames)
+        self._data_writer.writeheader()
         self._saving_data = True
         if not self._acquiring_data:
             self.start_acquiring_data()
@@ -104,7 +97,7 @@ class LickportArrayInterface():
                                 for x in zip(licked_strings,activated_strings)]
             lickport_datum = dict(zip(self._lickport_fieldnames,lickport_strings))
             datum = {**datum, **lickport_datum}
-            # self._data_writer.writerow(datum)
+            self._data_writer.writerow(datum)
 
     def _handle_data(self):
         data = self.controller.get_and_clear_saved_data()
