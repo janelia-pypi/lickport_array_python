@@ -1,14 +1,19 @@
 #+EXPORT_FILE_NAME: DESCRIPTION.md
-#+OPTIONS: title:nil author:nil email:nil toc:nil |:t ^:nil tags:nil
+#+OPTIONS: toc:nil |:t ^:nil tags:nil
 
 * lickport_array_interace
-- Version :: 1.0.3
+
+- Version :: 1.0.4
 - License :: BSD 3-Clause License
 - URL :: https://github.com/janelia-pypi/lickport_array_interface_python
 - Author :: Peter Polidoro
 - Email :: peter@polidoro.io
 
-  This Python package (lickport_array_interface)
+** About
+
+Python interface to the Janelia Dudman lab mouse lickport array.
+
+[[https://github.com/janelia-kicad/lickport_array_module][Lickport Array Module]]
 
 ** Example Usage
 
@@ -79,7 +84,7 @@ days.
 | "LA" or "AL" | lickport_n lick detected and activated         |
 | ""           | lickport_n neither lick detected nor activated |
 
-* Installation :noexport:
+* Installation
 
 [[https://github.com/janelia-pypi/python_setup]]
 

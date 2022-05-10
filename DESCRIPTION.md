@@ -2,13 +2,18 @@
 
 # lickport\_array\_interace
 
--   **Version:** 1.0.3
+-   **Version:** 1.0.4
 -   **License:** BSD 3-Clause License
 -   **URL:** <https://github.com/janelia-pypi/lickport_array_interface_python>
 -   **Author:** Peter Polidoro
 -   **Email:** peter@polidoro.io
-    
-    This Python package (lickport\_array\_interface)
+
+
+## About
+
+Python interface to the Janelia Dudman lab mouse lickport array.
+
+[Lickport Array Module](https://github.com/janelia-kicad/lickport_array_module)
 
 
 ## Example Usage
@@ -111,4 +116,35 @@ days.
 </tr>
 </tbody>
 </table>
+
+
+# Installation
+
+<https://github.com/janelia-pypi/python_setup>
+
+
+## Linux and Mac OS X
+
+    
+    python3 -m venv ~/venvs/lickport_array_interface
+    source ~/venvs/lickport_array_interface/bin/activate
+    pip install lickport_array_interface
+
+
+## Windows
+
+    
+    python3 -m venv C:\venvs\lickport_array_interface
+    C:\venvs\lickport_array_interface\Scripts\activate
+    pip install lickport_array_interface
+
+
+## Guix
+
+Setup guix-janelia channel:
+
+<https://github.com/guix-janelia/guix-janelia>
+
+    
+    guix install python-lickport-array-interface
 
