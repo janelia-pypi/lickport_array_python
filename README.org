@@ -2,7 +2,7 @@
 #+OPTIONS: title:nil author:nil email:nil toc:nil |:t ^:nil tags:nil
 
 * lickport_array_interace
-- Version :: 1.0.2
+- Version :: 1.0.3
 - License :: BSD 3-Clause License
 - URL :: https://github.com/janelia-pypi/lickport_array_interface_python
 - Author :: Peter Polidoro

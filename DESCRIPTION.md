@@ -2,7 +2,7 @@
 
 # lickport\_array\_interace
 
--   **Version:** 1.0.2
+-   **Version:** 1.0.3
 -   **License:** BSD 3-Clause License
 -   **URL:** <https://github.com/janelia-pypi/lickport_array_interface_python>
 -   **Author:** Peter Polidoro
