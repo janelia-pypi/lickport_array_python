@@ -10,9 +10,9 @@ from modular_client import ModularClient
 
 
 __version__ = None
-with open(Path(__file__).parent.parent / 'README.org') as readme_file:
+with open(Path(__file__).parent.parent / 'DESCRIPTION.md') as description:
     version_str = 'version'
-    readme_lines = readme_file.readlines()
+    readme_lines = description.readlines()
     for readme_line in readme_lines:
         if version_str in readme_line.lower():
             __version__ = re.search(r'\s*([\d.]+)',readme_line).group(1)

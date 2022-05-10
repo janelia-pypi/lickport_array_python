@@ -1,11 +1,10 @@
-#+TITLE: lickport_array_interface_python
+#+TITLE: lickport_array_interface
 #+AUTHOR: Peter Polidoro
 #+EMAIL: peter@polidoro.io
 #+EXPORT_FILE_NAME: DESCRIPTION.md
 #+OPTIONS: title:t author:t email:t toc:nil |:t ^:nil tags:nil
 
-* Description
-- Name :: lickport_array_interface_python
+* lickport_array_interace
 - Version :: 1.0.0
 - License :: BSD 3-Clause License
 - URL :: https://github.com/janelia-pypi/lickport_array_interface_python
@@ -46,7 +45,7 @@ dev.controller.deactivate_all_lickports()
 
 #+END_SRC
 
-* Data
+** Data
 
 #+BEGIN_EXAMPLE
 
@@ -57,7 +56,7 @@ time,millis,lickport_0,lickport_1,lickport_2,lickport_3,lickport_4,lickport_5,li
 
 #+END_EXAMPLE
 
-** time
+*** time
 
 time in seconds since the epoch
 
@@ -68,13 +67,13 @@ The term seconds since the epoch refers to the total number of elapsed seconds
 since the epoch, typically excluding leap seconds. Leap seconds are excluded
 from this total on all POSIX-compliant platforms.
 
-** millis
+*** millis
 
 The number of milliseconds passed since the LickportArrayController board was
 powered. This number will overflow (go back to zero), after approximately 50
 days.
 
-** lickport_n
+*** lickport_n
 
 | Symbol       | Meaning                                        |
 |--------------+------------------------------------------------|
@@ -83,7 +82,7 @@ days.
 | "LA" or "AL" | lickport_n lick detected and activated         |
 | ""           | lickport_n neither lick detected nor activated |
 
-* Installation
+* Installation :noexport:
 
 [[https://github.com/janelia-pypi/python_setup]]
 
@@ -109,16 +108,17 @@ pip install lickport_array_interface
 
 ** Guix
 
+Setup guix-janelia channel:
+
+https://github.com/guix-janelia/guix-janelia
+
 #+BEGIN_SRC sh
 
-git clone https://github.com/janelia-pypi/lickport_array_interface_python
-cd lickport_array_interface_python
-guix time-machine -C channels.scm -- shell --pure -f guix.scm python-ipython
-ipython
+guix install python-lickport-array-interface
 
 #+END_SRC
 
-* Development
+* Development :noexport:
 
 ** Guix
 
@@ -127,10 +127,7 @@ ipython
 git clone https://github.com/janelia-pypi/lickport_array_interface_python
 cd lickport_array_interface_python
 make shell
-python3 setup.py sdist bdist_wheel
-twine upload dist/*
-git add --all
-git clean -xdf
+make all
 exit
 
 #+END_SRC

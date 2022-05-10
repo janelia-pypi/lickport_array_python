@@ -1,4 +1,2 @@
-include README.org
 include DESCRIPTION.md
 include LICENSE
-include *.scm

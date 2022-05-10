@@ -1,6 +1,7 @@
-# Description
 
--   **Name:** lickport\_array\_interface\_python
+
+# lickport\_array\_interace
+
 -   **Version:** 1.0.0
 -   **License:** BSD 3-Clause License
 -   **URL:** <https://github.com/janelia-pypi/lickport_array_interface_python>
@@ -12,38 +13,35 @@
 
 ## Example Usage
 
-```python
-
-from lickport_array_interface import LickportArrayInterface
-dev = LickportArrayInterface() # Try to automatically detect port
-dev = LickportArrayInterface(port='/dev/ttyACM0') # Linux specific port
-dev = LickportArrayInterface(port='/dev/tty.usbmodem262471') # Mac OS X specific port
-dev = LickportArrayInterface(port='COM3') # Windows specific port
-
-data_path_string = '~/lickport_array_data/data_file'
-
-dev.start_acquiring_data()
-dev.start_saving_data(data_path_string)
-dev.stop_saving_data()
-dev.stop_acquiring_data()
-
-dev.controller.dispense_lickport_for_duration(0,200)
-dev.controller.dispense_lickports_for_duration([0,1],200)
-dev.controller.dispense_all_lickports_for_duration(200)
-dev.controller.get_activated_lickports()
-dev.controller.activate_only_lickport(0)
-dev.controller.activate_only_lickports([0,1])
-dev.controller.activate_lickport(0)
-dev.controller.activate_lickports([0,1])
-dev.controller.deactivate_lickport(0)
-dev.controller.deactivate_lickports([0,1])
-dev.controller.activate_all_lickports()
-dev.controller.deactivate_all_lickports()
-
-```
+    
+    from lickport_array_interface import LickportArrayInterface
+    dev = LickportArrayInterface() # Try to automatically detect port
+    dev = LickportArrayInterface(port='/dev/ttyACM0') # Linux specific port
+    dev = LickportArrayInterface(port='/dev/tty.usbmodem262471') # Mac OS X specific port
+    dev = LickportArrayInterface(port='COM3') # Windows specific port
+    
+    data_path_string = '~/lickport_array_data/data_file'
+    
+    dev.start_acquiring_data()
+    dev.start_saving_data(data_path_string)
+    dev.stop_saving_data()
+    dev.stop_acquiring_data()
+    
+    dev.controller.dispense_lickport_for_duration(0,200)
+    dev.controller.dispense_lickports_for_duration([0,1],200)
+    dev.controller.dispense_all_lickports_for_duration(200)
+    dev.controller.get_activated_lickports()
+    dev.controller.activate_only_lickport(0)
+    dev.controller.activate_only_lickports([0,1])
+    dev.controller.activate_lickport(0)
+    dev.controller.activate_lickports([0,1])
+    dev.controller.deactivate_lickport(0)
+    dev.controller.deactivate_lickports([0,1])
+    dev.controller.activate_all_lickports()
+    dev.controller.deactivate_all_lickports()
 
 
-# Data
+## Data
 
     
     time,millis,lickport_0,lickport_1,lickport_2,lickport_3,lickport_4,lickport_5,lickport_6,lickport_7,lickport_8,lickport_9,lickport_10,lickport_11
@@ -52,83 +50,65 @@ dev.controller.deactivate_all_lickports()
     1649700628,12085749,,,,,,,,,,,,L
 
 
-## time
+### time
 
 time in seconds since the epoch
 
-The epoch is the point where the time starts, and is platform dependent. For Unix, the epoch is January 1, 1970, 00:00:00 (UTC)
+The epoch is the point where the time starts, and is platform dependent. For
+Unix, the epoch is January 1, 1970, 00:00:00 (UTC)
 
-The term seconds since the epoch refers to the total number of elapsed seconds since the epoch, typically excluding leap seconds. Leap seconds are excluded from this total on all POSIX-compliant platforms.
-
-
-## millis
-
-The number of milliseconds passed since the LickportArrayController board was powered. This number will overflow (go back to zero), after approximately 50 days.
+The term seconds since the epoch refers to the total number of elapsed seconds
+since the epoch, typically excluding leap seconds. Leap seconds are excluded
+from this total on all POSIX-compliant platforms.
 
 
-## lickport\_n
+### millis
 
-| Symbol       | Meaning                                         |
-|------------ |----------------------------------------------- |
-| "L"          | lickport\_n lick detected                       |
-| "A"          | lickport\_n activated                           |
-| "LA" or "AL" | lickport\_n lick detected and activated         |
-| ""           | lickport\_n neither lick detected nor activated |
+The number of milliseconds passed since the LickportArrayController board was
+powered. This number will overflow (go back to zero), after approximately 50
+days.
 
 
-# Installation
+### lickport\_n
 
-<https://github.com/janelia-pypi/python_setup>
-
-
-## Linux and Mac OS X
-
-```sh
-
-python3 -m venv ~/venvs/lickport_array_interface
-source ~/venvs/lickport_array_interface/bin/activate
-pip install lickport_array_interface
-
-```
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
-## Windows
+<colgroup>
+<col  class="org-left" />
 
-```sh
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Symbol</th>
+<th scope="col" class="org-left">Meaning</th>
+</tr>
+</thead>
 
-python3 -m venv C:\venvs\lickport_array_interface
-C:\venvs\lickport_array_interface\Scripts\activate
-pip install lickport_array_interface
-
-```
-
-
-## Guix
-
-```sh
-
-git clone https://github.com/janelia-pypi/lickport_array_interface_python
-cd lickport_array_interface_python
-guix time-machine -C channels.scm -- shell --pure -f guix.scm python-ipython
-ipython
-
-```
+<tbody>
+<tr>
+<td class="org-left">"L"</td>
+<td class="org-left">lickport_n lick detected</td>
+</tr>
 
 
-# Development
+<tr>
+<td class="org-left">"A"</td>
+<td class="org-left">lickport_n activated</td>
+</tr>
 
 
-## Guix
+<tr>
+<td class="org-left">"LA" or "AL"</td>
+<td class="org-left">lickport_n lick detected and activated</td>
+</tr>
 
-```sh
 
-git clone https://github.com/janelia-pypi/lickport_array_interface_python
-cd lickport_array_interface_python
-make shell
-python3 setup.py sdist bdist_wheel
-twine upload dist/*
-git add --all
-git clean -xdf
-exit
+<tr>
+<td class="org-left">""</td>
+<td class="org-left">lickport_n neither lick detected nor activated</td>
+</tr>
+</tbody>
+</table>
 
-```
