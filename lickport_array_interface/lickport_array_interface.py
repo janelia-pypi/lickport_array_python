@@ -75,6 +75,7 @@ class LickportArrayInterface():
         data_file_path = data_directory_path / data_file_name
         data_directory_path.mkdir(parents=True,exist_ok=True)
         print('Creating: {0}'.format(data_file_path))
+        self._data_file = open(data_file_path,'w')
         self._data_writer = csv.DictWriter(self._data_file,fieldnames=self._data_fieldnames)
         self._data_writer.writeheader()
         self._saving_data = True
