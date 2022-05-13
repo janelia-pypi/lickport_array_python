@@ -3,20 +3,10 @@ from threading import Timer
 import atexit
 from pathlib import Path
 from datetime import datetime
-import re
 import csv
 
 from modular_client import ModularClient
 
-
-__version__ = None
-with open(Path(__file__).parent.parent / 'DESCRIPTION.md') as description:
-    version_str = 'version'
-    readme_lines = description.readlines()
-    for readme_line in readme_lines:
-        if version_str in readme_line.lower():
-            __version__ = re.search(r'\s*([\d.]+)',readme_line).group(1)
-            break
 
 DEBUG = False
 

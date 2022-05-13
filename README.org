@@ -3,7 +3,13 @@
 
 * lickport_array_interace
 
-- Version :: 1.0.5
+#+begin_src python :tangle lickport_array_interface/__about__.py
+
+__version__ = "10.11.13"
+
+#+end_src
+
+- Version :: 1.0.6
 - License :: BSD 3-Clause License
 - URL :: https://github.com/janelia-pypi/lickport_array_interface_python
 - Author :: Peter Polidoro

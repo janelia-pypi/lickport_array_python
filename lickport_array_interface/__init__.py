@@ -1,4 +1,13 @@
-'''
-This Python package (lickport_array_interface) creates a class named LickportArrayInterface.
-'''
-from .lickport_array_interface import LickportArrayInterface, __version__
+from lickport_array_interface.__about__ import (
+    # __author__,
+    # __commit__,
+    # __copyright__,
+    # __email__,
+    # __license__,
+    # __summary__,
+    # __title__,
+    # __uri__,
+    __version__,
+)
+
+from .lickport_array_interface import LickportArrayInterface
