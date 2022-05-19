@@ -1,10 +1,13 @@
 shell:
-	guix time-machine -C channels.scm -- shell --pure -D -f guix.scm
+	guix time-machine -C .channels.scm -- shell --pure -D -f .guix.scm
 
-all: readme package upload add clean
+all: project package upload add clean
 
-readme:
-	emacs -Q --script process-readme.el
+edit:
+	emacs -q --no-site-file --no-site-lisp --no-splash -l .emacs --file .documentation.org
+
+documentation:
+	emacs --batch -Q  -l .emacs --eval '(process-org ".documentation.org")'
 
 package:
 	python3 setup.py sdist bdist_wheel

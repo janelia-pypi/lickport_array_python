@@ -1,27 +1,15 @@
-# lickport\_array\_interace
+<!--- README.md is generated automatically, file edits may be overwritten --->
 
 
-## About
-
-```python
-
-__version__ = '1.0.7'
-__summary__ = 'Python interface to the Janelia Dudman lab mouse lickport array.'
-__license__ = 'BSD 3-Clause License'
-__url__ = 'https://github.com/janelia-pypi/lickport_array_interface_python'
-__author__ = 'Peter Polidoro'
-__email__ = 'peter@polidoro.io'
-__copyright__ = '2022 Howard Hughes Medical Institute'
-
-```
+# About
 
 
-## More Information
+# More Information
 
 This library is an interface to the [Lickport Array Module](https://github.com/janelia-kicad/lickport_array_module).
 
 
-## Usage
+# Usage
 
 ```python
 
@@ -54,7 +42,7 @@ dev.controller.deactivate_all_lickports()
 ```
 
 
-## Data
+# Data
 
     
     time,millis,lickport_0,lickport_1,lickport_2,lickport_3,lickport_4,lickport_5,lickport_6,lickport_7,lickport_8,lickport_9,lickport_10,lickport_11
@@ -63,7 +51,7 @@ dev.controller.deactivate_all_lickports()
     1649700628,12085749,,,,,,,,,,,,L
 
 
-### time
+## time
 
 time in seconds since the epoch
 
@@ -72,12 +60,12 @@ The epoch is the point where the time starts, and is platform dependent. For Uni
 The term seconds since the epoch refers to the total number of elapsed seconds since the epoch, typically excluding leap seconds. Leap seconds are excluded from this total on all POSIX-compliant platforms.
 
 
-### millis
+## millis
 
 The number of milliseconds passed since the LickportArrayController board was powered. This number will overflow (go back to zero), after approximately 50 days.
 
 
-### lickport\_n
+## lickport\_n
 
 | Symbol       | Meaning                                         |
 |------------ |----------------------------------------------- |
