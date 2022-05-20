@@ -54,6 +54,7 @@ peter@polidoro.io
 #+NAME: dependencies
 #+BEGIN_SRC text :exports none :noweb yes
 modular_client
+test
 #+END_SRC
 
 #+BEGIN_EXAMPLE
@@ -63,24 +64,15 @@ File edits may be overwritten! -->
 * About
 
 #+BEGIN_SRC text :noweb yes
-Name
-: <<name>>
-Version
-: <<version>>
-Description
-: <<description>>
-License
-: <<license>>
-URL
-: <<url>>
-Author
-: <<author>>
-Email
-: <<email>>
-Copyright
-: <<copyright>>
-Dependencies
-: <<dependencies>>
+- Name: <<name>>
+- Version: <<version>>
+- Description: <<description>>
+- License: <<license>>
+- URL: <<url>>
+- Author: <<author>>
+- Email: <<email>>
+- Copyright: <<copyright>>
+- Dependencies: <<dependencies>>
 #+END_SRC
 
 * More Information
