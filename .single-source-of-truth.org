@@ -54,7 +54,6 @@ peter@polidoro.io
 #+NAME: dependencies
 #+BEGIN_SRC text :exports none :noweb yes
 modular_client
-test
 #+END_SRC
 
 #+BEGIN_EXAMPLE

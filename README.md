@@ -15,7 +15,6 @@
 - Copyright: 2022 Howard Hughes Medical Institute
 - Dependencies:
   - modular_client
-  - test
 ```
 
 
