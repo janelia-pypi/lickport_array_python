@@ -1,4 +1,3 @@
-# Single Source of Truth
 #+EXPORT_FILE_NAME: README.md
 #+OPTIONS: toc:nil |:t ^:nil tags:nil
 
@@ -7,8 +6,8 @@
 lickport_array_interface
 #+END_SRC
 
-#+NAME: repository-name :noweb yes
-#+BEGIN_SRC text :exports none
+#+NAME: repository-name
+#+BEGIN_SRC text :exports none :noweb yes
 lickport_array_interface_python
 #+END_SRC
 
@@ -19,7 +18,7 @@ python-lickport-array-interface
 
 #+NAME: version
 #+BEGIN_SRC text :exports none :noweb yes
-1.0.8
+1.0.10
 #+END_SRC
 
 #+NAME: description
@@ -53,7 +52,7 @@ peter@polidoro.io
 #+END_SRC
 
 #+BEGIN_EXAMPLE
-<!-- README.me is generated automatically from .ssot.org
+<!-- README.me is generated automatically from .single-source-of-truth.org
 File edits may be overwritten! -->
 #+END_EXAMPLE
 * About
@@ -184,14 +183,14 @@ exit
 * Tangled Files                                                    :noexport:
 
 #+BEGIN_SRC text :tangle MANIFEST.in :exports none :noweb yes
-# MANIFEST.in is generated automatically from .ssot.org
+# MANIFEST.in is generated automatically from .single-source-of-truth.org
 # File edits may be overwritten!
 include README.md
 include LICENSE
 #+END_SRC
 
 #+BEGIN_SRC text :tangle pyproject.toml :exports none :noweb yes
-# pyproject.toml is generated automatically from .ssot.org
+# pyproject.toml is generated automatically from .single-source-of-truth.org
 # File edits may be overwritten!
 [build-system]
 requires = [
@@ -201,7 +200,7 @@ requires = [
 #+END_SRC
 
 #+BEGIN_SRC text :tangle setup.cfg :exports none :noweb yes
-# setup.cfg is generated automatically from .ssot.org
+# setup.cfg is generated automatically from .single-source-of-truth.org
 # File edits may be overwritten!
 [metadata]
 name = <<name>>
@@ -240,7 +239,7 @@ universal=1
 #+END_SRC
 
 #+BEGIN_SRC text :tangle setup.py :exports none :noweb yes
-# setup.py is generated automatically from .ssot.org
+# setup.py is generated automatically from .single-source-of-truth.org
 # File edits may be overwritten!
 from setuptools import setup
 
@@ -250,7 +249,7 @@ if __name__ == '__main__':
 #+END_SRC
 
 #+BEGIN_SRC python :tangle lickport_array_interface/__about__.py :exports none :noweb yes
-# __about__.py is generated automatically from .ssot.org
+# __about__.py is generated automatically from .single-source-of-truth.org
 # File edits may be overwritten!
 __version__ = '<<version>>'
 __description__ = '<<description>>'

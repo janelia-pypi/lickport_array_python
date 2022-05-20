@@ -4,10 +4,10 @@ shell:
 all: files package upload add clean
 
 edits:
-	emacs -q --no-site-file --no-site-lisp --no-splash -l .emacs --file .ssot.org
+	emacs -q --no-site-file --no-site-lisp --no-splash -l .emacs --file .single-source-of-truth.org
 
 files:
-	emacs --batch -Q  -l .emacs --eval '(process-org ".ssot.org")'
+	emacs --batch -Q  -l .emacs --eval '(process-org ".single-source-of-truth.org")'
 
 package:
 	python3 setup.py sdist bdist_wheel

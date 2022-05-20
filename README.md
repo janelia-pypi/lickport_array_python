@@ -1,4 +1,4 @@
-<!-- README.me is generated automatically from .ssot.org
+<!-- README.me is generated automatically from .single-source-of-truth.org
     File edits may be overwritten! -->
 
 
@@ -6,10 +6,10 @@
 
 ```text
 - Name :: lickport_array_interface
-- Version :: 1.0.8
+- Version :: 1.0.9
 - Description :: Python interface to the Janelia Dudman lab mouse lickport array.
 - License :: BSD 3-Clause License
-- URL :: https://github.com/janelia-pypi/
+- URL :: https://github.com/janelia-pypi/lickport_array_interface_python
 - Author :: Peter Polidoro
 - Email :: peter@polidoro.io
 - Copyright :: 2022 Howard Hughes Medical Institute
