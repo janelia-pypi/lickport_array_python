@@ -1,2 +1,4 @@
+# MANIFEST.in is generated automatically from .ssot.org
+# File edits may be overwritten!
 include README.md
 include LICENSE

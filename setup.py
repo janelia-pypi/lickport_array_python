@@ -1,3 +1,5 @@
+# setup.py is generated automatically from .ssot.org
+# File edits may be overwritten!
 from setuptools import setup
 
 

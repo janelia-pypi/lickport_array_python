@@ -1,7 +1,19 @@
-<!--- README.md is generated automatically, file edits may be overwritten --->
+<!-- README.me is generated automatically from .ssot.org
+    File edits may be overwritten! -->
 
 
 # About
+
+```text
+- Name :: lickport_array_interface
+- Version :: 1.0.8
+- Description :: Python interface to the Janelia Dudman lab mouse lickport array.
+- License :: BSD 3-Clause License
+- URL :: https://github.com/janelia-pypi/
+- Author :: Peter Polidoro
+- Email :: peter@polidoro.io
+- Copyright :: 2022 Howard Hughes Medical Institute
+```
 
 
 # More Information
@@ -12,7 +24,6 @@ This library is an interface to the [Lickport Array Module](https://github.com/j
 # Usage
 
 ```python
-
 from lickport_array_interface import LickportArrayInterface
 dev = LickportArrayInterface() # Try to automatically detect port
 dev = LickportArrayInterface(port='/dev/ttyACM0') # Linux specific port
@@ -38,20 +49,18 @@ dev.controller.deactivate_lickport(0)
 dev.controller.deactivate_lickports([0,1])
 dev.controller.activate_all_lickports()
 dev.controller.deactivate_all_lickports()
-
 ```
 
 
-# Data
+## Data
 
-    
     time,millis,lickport_0,lickport_1,lickport_2,lickport_3,lickport_4,lickport_5,lickport_6,lickport_7,lickport_8,lickport_9,lickport_10,lickport_11
     1649700627,12084104,,,,,,,,,,,L,
     1649700628,12085195,L,,,,,,,,,,,
     1649700628,12085749,,,,,,,,,,,,L
 
 
-## time
+### time
 
 time in seconds since the epoch
 
@@ -60,12 +69,12 @@ The epoch is the point where the time starts, and is platform dependent. For Uni
 The term seconds since the epoch refers to the total number of elapsed seconds since the epoch, typically excluding leap seconds. Leap seconds are excluded from this total on all POSIX-compliant platforms.
 
 
-## millis
+### millis
 
 The number of milliseconds passed since the LickportArrayController board was powered. This number will overflow (go back to zero), after approximately 50 days.
 
 
-## lickport\_n
+### lickport\_n
 
 | Symbol       | Meaning                                         |
 |------------ |----------------------------------------------- |
@@ -83,22 +92,18 @@ The number of milliseconds passed since the LickportArrayController board was po
 ## Linux and Mac OS X
 
 ```sh
-
 python3 -m venv ~/venvs/lickport_array_interface
 source ~/venvs/lickport_array_interface/bin/activate
 pip install lickport_array_interface
-
 ```
 
 
 ## Windows
 
 ```sh
-
 python3 -m venv C:\venvs\lickport_array_interface
 C:\venvs\lickport_array_interface\Scripts\activate
 pip install lickport_array_interface
-
 ```
 
 
@@ -109,7 +114,5 @@ Setup guix-janelia channel:
 <https://github.com/guix-janelia/guix-janelia>
 
 ```sh
-
 guix install python-lickport-array-interface
-
 ```

@@ -3,7 +3,7 @@ from lickport_array_interface.__about__ import (
     __copyright__,
     __email__,
     __license__,
-    __summary__,
+    __description__,
     __url__,
     __version__,
 )
