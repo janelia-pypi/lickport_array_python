@@ -51,6 +51,11 @@ peter@polidoro.io
 2022 Howard Hughes Medical Institute
 #+END_SRC
 
+#+NAME: dependencies
+#+BEGIN_SRC text :exports none :noweb yes
+modular_client
+#+END_SRC
+
 #+BEGIN_EXAMPLE
 <!-- README.me is generated automatically from .single-source-of-truth.org
 File edits may be overwritten! -->
@@ -58,14 +63,24 @@ File edits may be overwritten! -->
 * About
 
 #+BEGIN_SRC text :noweb yes
-- Name :: <<name>>
-- Version :: <<version>>
-- Description :: <<description>>
-- License :: <<license>>
-- URL :: <<url>>
-- Author :: <<author>>
-- Email :: <<email>>
-- Copyright :: <<copyright>>
+Name
+: <<name>>
+Version
+: <<version>>
+Description
+: <<description>>
+License
+: <<license>>
+URL
+: <<url>>
+Author
+: <<author>>
+Email
+: <<email>>
+Copyright
+: <<copyright>>
+Dependencies
+: <<dependencies>>
 #+END_SRC
 
 * More Information
@@ -218,18 +233,18 @@ classifiers =
 [options]
 packages = find:
 install_requires =
-    modular_client
+    <<dependencies>>
 
 [options.entry_points]
 console_scripts =
-    lai = lickport_array_interface.lickport_array_interface:main
+    lai = <<name>>.<<name>>:main
 
 [options.packages.find]
 exclude =
     examples*
     tools*
     docs*
-    lickport_array_interface.tests*
+    <<name>>.tests*
 
 [bdist_wheel]
 # This flag says that the code is written to work on both Python 2 and Python
