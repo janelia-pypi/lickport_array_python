@@ -6,7 +6,7 @@
 
 ```text
 - Name: lickport_array_interface
-- Version: 1.0.11
+- Version: 2.0.0
 - Description: Python interface to the Janelia Dudman lab mouse lickport array.
 - License: BSD 3-Clause License
 - URL: https://github.com/janelia-pypi/lickport_array_interface_python
@@ -23,19 +23,25 @@
 This library is an interface to the [Lickport Array Module](https://github.com/janelia-kicad/lickport_array_module).
 
 
-# Usage
+# Example Usage
 
 ```python
-from lickport_array_interface import LickportArrayInterface
+from lickport_array_interface import LickportArrayInterface, LickportArrayMetadata
 dev = LickportArrayInterface() # Try to automatically detect port
 dev = LickportArrayInterface(port='/dev/ttyACM0') # Linux specific port
 dev = LickportArrayInterface(port='/dev/tty.usbmodem262471') # Mac OS X specific port
 dev = LickportArrayInterface(port='COM3') # Windows specific port
 
-data_path_string = '~/lickport_array_data/data_file'
+data_path_str = '~/lickport_array_data/data_file'
 
+metadata = LickportArrayMetadata()
+metadata.experiment_name = 'mouse_library'
+metadata.task_name = 'hex_foraging_V2'
+metadata.subject_id = 'ML11_NAc'
+
+dev.controller.activate_lickports([0,1])
 dev.start_acquiring_data()
-dev.start_saving_data(data_path_string)
+dev.start_saving_data(data_path_str,metadata)
 dev.stop_saving_data()
 dev.stop_acquiring_data()
 
@@ -56,10 +62,17 @@ dev.controller.deactivate_all_lickports()
 
 ## Data
 
+    I Experiment name  : mouse_library
+    I Task name  : hex_foraging_V2
+    I Subject ID : ML11_NAc
+    I Start date : 2022/05/23 16:43:38
     time,millis,lickport_0,lickport_1,lickport_2,lickport_3,lickport_4,lickport_5,lickport_6,lickport_7,lickport_8,lickport_9,lickport_10,lickport_11
-    1649700627,12084104,,,,,,,,,,,L,
-    1649700628,12085195,L,,,,,,,,,,,
-    1649700628,12085749,,,,,,,,,,,,L
+    1653338620,956503527,A,LA,,,,,,,,,,
+    1653338622,956505441,LA,A,,,,,,,,,,
+    1653338624,956507372,A,A,,,,,,,,,,L
+    1653338626,956509622,A,A,,,,,,L,,,,
+    1653338628,956511133,A,A,,L,,,,,,,,
+    1653338629,956512828,A,A,,,L,,,,,,,
 
 
 ### time

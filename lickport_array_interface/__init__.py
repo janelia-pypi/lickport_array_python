@@ -1,3 +1,9 @@
+'''
+Python interface to the Janelia Dudman lab mouse lickport array.
+'''
+
+# __init__.py is generated automatically from .single-source-of-truth.org
+# File edits may be overwritten!
 from lickport_array_interface.__about__ import (
     __author__,
     __copyright__,
@@ -8,4 +14,4 @@ from lickport_array_interface.__about__ import (
     __version__,
 )
 
-from .lickport_array_interface import LickportArrayInterface
+from .lickport_array_interface import LickportArrayInterface, LickportArrayMetadata

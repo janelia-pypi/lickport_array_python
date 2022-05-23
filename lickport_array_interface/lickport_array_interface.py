@@ -1,17 +1,51 @@
-import time
+from time import time
 from threading import Timer
 import atexit
 from pathlib import Path
-from datetime import datetime
 import csv
+
+from datetime import datetime
+from dataclasses import dataclass
 
 from modular_client import ModularClient
 
 
 DEBUG = False
 
+@dataclass
+class LickportArrayMetadata():
+    '''
+    Lickport array metadata added to the top of every saved data file.
+    '''
+    _LINE_PREFIX = 'I '
+    experiment_name: str = ''
+    task_name: str = ''
+    subject_id: str = ''
+
+    def set_start_date_time(self):
+        dt = datetime.fromtimestamp(time())
+        self.start_date_time = dt.strftime('%Y/%m/%d %H:%M:%S')
+
+    def _write_line_to_data_file(self,description,value):
+        self._data_file.write(self._LINE_PREFIX + \
+                              description + \
+                              value + \
+                              '\r\n')
+
+    def write_to_data_file(self,data_file):
+        self._data_file = data_file
+        self._write_line_to_data_file('Experiment name  : ',
+                                      self.experiment_name)
+        self._write_line_to_data_file('Task name  : ',
+                                      self.task_name)
+        self._write_line_to_data_file('Subject ID : ',
+                                      self.subject_id)
+        self._write_line_to_data_file('Start date : ',
+                                      self.start_date_time)
+
 class LickportArrayInterface():
     '''
+    Python interface to the Janelia Dudman lab mouse lickport array.
     '''
     _DATA_PERIOD = 1.0
     _DATA_BASE_PATH_STRING = '~/lickport_array_data'
@@ -28,7 +62,8 @@ class LickportArrayInterface():
         atexit.register(self._exit)
 
         self.controller = ModularClient(*args,**kwargs)
-        self.controller.set_time(int(time.time()))
+        self.controller.deactivate_all_lickports()
+        self.controller.set_time(int(time()))
         self.controller.calibrate_lick_sensor()
         self._lickport_count = self.controller.get_lickport_count()
 
@@ -51,21 +86,20 @@ class LickportArrayInterface():
         self._acquiring_data = True
 
     def stop_acquiring_data(self):
+        self.controller.deactivate_all_lickports()
         self._data_timer.cancel()
         self._acquiring_data = False
 
-    def start_saving_data(self, data_path_string=None):
-        if not data_path_string:
-            data_directory_path = self._base_path / self._get_date_str()
-            data_file_name = self._get_time_str() + self._DATA_FILE_SUFFIX
-        else:
-            data_path = Path(data_path_string).expanduser()
-            data_directory_path = data_path.parent
-            data_file_name = data_path.stem +  self._DATA_FILE_SUFFIX
+    def start_saving_data(self,data_path_str,metadata):
+        metadata.set_start_date_time()
+        data_path = Path(data_path_str).expanduser()
+        data_directory_path = data_path.parent
+        data_file_name = data_path.stem + self._DATA_FILE_SUFFIX
         data_file_path = data_directory_path / data_file_name
         data_directory_path.mkdir(parents=True,exist_ok=True)
         print('Creating: {0}'.format(data_file_path))
         self._data_file = open(data_file_path,'w')
+        metadata.write_to_data_file(self._data_file)
         self._data_writer = csv.DictWriter(self._data_file,fieldnames=self._data_fieldnames)
         self._data_writer.writeheader()
         self._saving_data = True
@@ -107,31 +141,3 @@ class LickportArrayInterface():
             self.stop_acquiring_data()
         except AttributeError:
             pass
-
-    def _get_datetime(self,timestamp=None):
-        dt = None
-        if timestamp is None:
-            dt = datetime.fromtimestamp(time.time())
-        else:
-            dt = datetime.fromtimestamp(timestamp)
-        return dt
-
-    def _get_date_str(self,timestamp=None):
-        dt = self._get_datetime(timestamp)
-        date_str = dt.strftime('%Y-%m-%d')
-        return date_str
-
-    def _get_time_str(self,timestamp=None):
-        dt = self._get_datetime(timestamp)
-        time_str = dt.strftime('%H-%M-%S')
-        return time_str
-
-
-
-def main(args=None):
-    lai = LickportArrayInterface()
-    lai.start_saving_data()
-
-# -----------------------------------------------------------------------------------------
-if __name__ == '__main__':
-    main()

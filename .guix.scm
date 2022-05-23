@@ -30,8 +30,7 @@
                          emacs-ox-gfm
                          python-wheel
                          python-twine
-                         python-ipython
-                         python-vitables))
+                         python-ipython))
     (propagated-inputs (list python-modular-client))
     (home-page "")
     (synopsis "")
