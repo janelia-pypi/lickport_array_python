@@ -8,7 +8,7 @@ lickport_array_interface
 
 #+NAME: version
 #+BEGIN_SRC text :exports none :noweb yes
-2.0.0
+2.0.1
 #+END_SRC
 
 #+NAME: repository-name

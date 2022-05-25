@@ -6,7 +6,7 @@
 
 ```text
 - Name: lickport_array_interface
-- Version: 2.0.0
+- Version: 2.0.1
 - Description: Python interface to the Janelia Dudman lab mouse lickport array.
 - License: BSD 3-Clause License
 - URL: https://github.com/janelia-pypi/lickport_array_interface_python

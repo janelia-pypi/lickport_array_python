@@ -5,32 +5,35 @@ from pathlib import Path
 import csv
 
 from datetime import datetime
-from dataclasses import dataclass
 
 from modular_client import ModularClient
 
 
 DEBUG = False
 
-@dataclass
 class LickportArrayMetadata():
     '''
     Lickport array metadata added to the top of every saved data file.
     '''
     _LINE_PREFIX = 'I '
-    experiment_name: str = ''
-    task_name: str = ''
-    subject_id: str = ''
+
+    def __init__(self,
+                 experiment_name='',
+                 task_name='',
+                 subject_id=''):
+        self.experiment_name = str(experiment_name)
+        self.task_name = str(task_name)
+        self.subject_id = str(subject_id)
 
     def set_start_date_time(self):
         dt = datetime.fromtimestamp(time())
         self.start_date_time = dt.strftime('%Y/%m/%d %H:%M:%S')
 
     def _write_line_to_data_file(self,description,value):
-        self._data_file.write(self._LINE_PREFIX + \
-                              description + \
-                              value + \
-                              '\r\n')
+        self._data_file.write(self._LINE_PREFIX
+                              + description
+                              + value
+                              + '\r\n')
 
     def write_to_data_file(self,data_file):
         self._data_file = data_file
