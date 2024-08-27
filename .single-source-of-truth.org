@@ -33,7 +33,7 @@ BSD 3-Clause License
 
 #+NAME: url
 #+BEGIN_SRC text :exports none :noweb yes
-https://github.com/janelia-pypi/<<repository-name>>
+https://github.com/janelia-python/<<repository-name>>
 #+END_SRC
 
 #+NAME: author
@@ -159,7 +159,7 @@ days.
 
 * Installation
 
-[[https://github.com/janelia-pypi/python_setup]]
+[[https://github.com/janelia-python/python_setup]]
 
 ** Linux and Mac OS X
 

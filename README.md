@@ -9,7 +9,7 @@
 - Version: 2.0.1
 - Description: Python interface to the Janelia Dudman lab mouse lickport array.
 - License: BSD 3-Clause License
-- URL: https://github.com/janelia-pypi/lickport_array_interface_python
+- URL: https://github.com/janelia-python/lickport_array_interface_python
 - Author: Peter Polidoro
 - Email: peter@polidoro.io
 - Copyright: 2022 Howard Hughes Medical Institute
@@ -101,7 +101,7 @@ The number of milliseconds passed since the LickportArrayController board was po
 
 # Installation
 
-<https://github.com/janelia-pypi/python_setup>
+<https://github.com/janelia-python/python_setup>
 
 
 ## Linux and Mac OS X
